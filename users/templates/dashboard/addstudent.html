@@ -14,7 +14,7 @@
        type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
        <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
        <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
@@ -28,22 +28,28 @@
 {% block content %}
 <div class="admin-container">
     <div class="container-detials">
+        <form method="post">
+            {% csrf_token %}
         <div class="add-course">
             <div class="course-style" style="width: 800px; margin-top: 20px;"> 
                 <div class="content"> 
                     <h2>Add Student</h2> 
                     <div class="form"> 
                         <div class="inputBox"> 
+                            {{ form.full_name.errors }}
                             {{ form.full_name }} <i>Full Name</i> 
                         </div> 
-                        <div class="inputBox"> 
-                            {{ form.registration_number }}<i>Username</i> 
+                        <div class="inputBox">
+                            {{ form.registration_number.errors }} 
+                            {{ form.registration_number }}<i>Registration Number</i> 
                         </div>
                         <div class="inputBox"> 
+                            {{ form.password.erros }}
                             {{ form.password }}<i>Password</i> 
                         </div>
                         <div class="inputBox"> 
                             <label style="color:white; padding-bottom:10px;">Semester</label>
+                            {{ form.semester.errors }}
                             {{ form.semester }}
                             {{form.role}}
                         </div> 
@@ -58,7 +64,7 @@
                 </div> 
             </div> 
     </div>
-
+</form>
       <h1>All Students</h1>
     <table class="table table-striped mb-0">
         <thead>
@@ -83,6 +89,6 @@
     </table>
     </div>
     </div>
-    
+
 {% endblock %}
 
