@@ -1,0 +1,557 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+.test{
+    background-color: rgb(21, 255, 0);
+}
+.log-container{
+    margin-top: -131px;
+}
+.nav_left {
+    background-color: #0d6efd;
+    border-top-left-radius: 48px;
+    border-bottom-left-radius: 48px;
+}
+
+.nav-tabs .nav-link.active , .nav-tabs .nav-link:hover{
+    background-color: transparent;
+    border-color: transparent;
+    border-top: 4px solid #fff;
+    color: #fff;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: 0 20px 0 30px;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.nav-link {
+    padding: 1rem 0.5rem;
+    color: #fff;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    color: #fff;
+}
+
+.search_input {
+    width:100%;
+    border-radius: 10px;
+    border: none;
+    line-height: initial;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #f19159;
+}
+
+.search_input:focus-visible {
+    outline: none;
+}
+
+input.search_input::placeholder {
+    color: #cfd2ec;
+    vertical-align: middle;
+}
+
+.search_img {
+    top: 7px;
+    right: 8px;
+}
+
+.navbar-toggler {
+    border: 3px solid #f19159;
+}
+
+.logo{
+width: 36%;
+height: 100%;
+}
+.dark_logo{
+    width: 36%;
+    height: 100%;
+    background-color: #181818;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(35, 76, 203, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+.navbuttons{
+    height: 43px;
+    width: 90px;
+    border-radius: 10px;
+    background: white;
+    color: rgb(0, 0, 0);
+}
+.navbuttons:hover{
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    transition: 0.5s ease;
+}
+.navbar-brand{
+    padding: 0px;
+    margin: 0px;
+}
+.navbar{
+    z-index: 3;
+}
+.footer-07 {
+    background: #121212; }
+    .footer-07 a {
+      color: #a3de83; }
+    .footer-07 p {
+      color: rgba(255, 255, 255, 0.3); }
+    .footer-07 .footer-heading {
+      font-size: 30px;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 30px; }
+      .footer-07 .footer-heading .logo {
+        color: #fff; }
+    .footer-07 .menu {
+      margin-bottom: 30px; }
+      .footer-07 .menu a {
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px; }
+    .footer-07 .ftco-footer-social li a {
+      background: transparent;
+      border: 1px solid #a3de83; }
+
+.ftco-footer-social li {
+    list-style: none;
+    margin: 0 10px 0 0;
+    display: inline-block; }
+    .ftco-footer-social li a {
+      height: 40px;
+      width: 40px;
+      display: block;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      position: relative; }
+      .ftco-footer-social li a span {
+        position: absolute;
+        font-size: 20px;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); }
+      .ftco-footer-social li a:hover {
+        color: #fff; }
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto; }
+            @media (min-width: 576px) {
+              .container {
+                max-width: 540px; } }
+            @media (min-width: 768px) {
+              .container {
+                max-width: 720px; } }
+            @media (min-width: 992px) {
+              .container {
+                max-width: 960px; } }
+            @media (min-width: 1200px) {
+              .container {
+                max-width: 1140px; } }
+                .ftco-footer-social li {
+                    list-style: none;
+                    margin: 0 10px 0 0;
+                    display: inline-block; }
+                    .ftco-footer-social li a {
+                      height: 40px;
+                      width: 40px;
+                      display: block;
+                      background: rgba(0, 0, 0, 0.05);
+                      border-radius: 50%;
+                      position: relative; }
+                      .ftco-footer-social li a span {
+                        position: absolute;
+                        font-size: 20px;
+                        top: 50%;
+                        left: 50%;
+                        -webkit-transform: translate(-50%, -50%);
+                        -ms-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%); }
+                      .ftco-footer-social li a:hover {
+                        color: #fff; }
+.footer-container{
+    padding-top: 2em;
+    padding-bottom: 0em;
+    min-height: 370px;
+}
+
+section 
+{
+ 
+  width: 100vw;
+  height: 137vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+section::before 
+{
+    display: none;
+    z-index: -2;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#000,#0f0,#000);
+  animation: animate 5s linear infinite;
+}
+@keyframes animate 
+{
+  0%
+  {
+    transform: translateY(-100%);
+  }
+  100%
+  {
+    transform: translateY(100%);
+  }
+}
+section span 
+{
+  position: relative;
+  display: block;
+  width: calc(6.25vw - 2px);
+  height: calc(6.25vw - 2px);
+  background: #181818;
+  z-index: 2;
+  transition: 1.5s;
+}
+section span:hover 
+{
+  background: #0d6efd;
+  transition: 0s;
+}
+
+section .signin
+{
+  position: absolute;
+  width: 400px;
+  background: #222;  
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(0,0,0,9);
+  color: white;
+}
+section .signin .content 
+{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+section .signin .content h2 
+{
+  font-size: 2em;
+  color: white;
+  text-transform: uppercase;
+}
+section .signin .content .form 
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+section .signin .content .form .inputBox
+{
+  position: relative;
+  width: 100%;
+}
+section .signin .content .form .inputBox input 
+{
+  position: relative;
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+}
+section .signin .content .form .inputBox i 
+{
+  position: absolute;
+  left: 0;
+  padding: 15px 10px;
+  font-style: normal;
+  color: #aaa;
+  transition: 0.5s;
+  pointer-events: none;
+}
+.signin .content .form .inputBox input:focus ~ i,
+.signin .content .form .inputBox input:valid ~ i
+{
+  transform: translateY(-7.5px);
+  font-size: 0.8em;
+  color: #fff;
+}
+.signin .content .form .links 
+{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.signin .content .form .links a 
+{
+  color: #fff;
+  text-decoration: none;
+}
+.signin .content .form .links a:nth-child(2)
+{
+  color: white;
+  font-weight: 600;
+}
+.signin .content .form .links a:hover:nth-child(2)
+{
+  color: rgb(0, 205, 0);
+  transition: 0.5s EASE;
+}
+.login-button
+{
+    padding: 10px;
+    background: #0d6efd;
+    color: white;
+    width: 100%;
+    font-weight: 600;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 50px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+}
+.login-button:hover
+{
+  background: green;
+  transition: 0.5s ease;
+}
+.login-button:active
+{
+  opacity: 0.6;
+}
+@media (max-width: 900px)
+{
+  section span 
+  {
+    width: calc(10vw - 2px);
+    height: calc(10vw - 2px);
+  }
+}
+@media (max-width: 600px)
+{
+  section span 
+  {
+    width: calc(20vw - 2px);
+    height: calc(20vw - 2px);
+  }
+}
+select#id_department ,  select#id_num_sections, select#id_semester{
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #ccc;
+    padding: 15px 10px;
+    border-radius: 3px;
+    width: 100%;
+    margin-top: 3px;
+}
+ul.errorlist {
+    color: white;
+}
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload:hover {
+    background-color: #2980b9;
+}
+
+/* Style for the profile picture preview */
+.profile-pic-preview {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#profile-pic-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.form-group {
+    text-align: center;
+}
+.profile-pic-preview{
+    margin-left: 109px;
+}
+.admin-container{
+  display: flex;
+  justify-content: center;
+}
+.container-detials {
+  display: flex;
+  width: 80%;
+  text-align: center;
+  flex-direction: column;
+  padding-bottom: 45px;
+}
+.container-detials table {
+  text-align: left;
+}
+
+.add-course .course-style
+{
+  width: 400px;
+  background: #222;  
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(0,0,0,9);
+  color: white;
+}
+.add-course .course-style .content 
+{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+.add-course .scourse-style .content h2 
+{
+  font-size: 2em;
+  color: white;
+  text-transform: uppercase;
+}
+.add-course .course-style .content .form 
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.add-course .course-style .content .form .inputBox
+{
+  position: relative;
+  width: 100%;
+}
+.add-course .course-style .content .form .inputBox input 
+{
+  position: relative;
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+}
+.add-course .course-style .content .form .inputBox i 
+{
+  position: absolute;
+  left: 0;
+  padding: 15px 10px;
+  font-style: normal;
+  color: #aaa;
+  transition: 0.5s;
+  pointer-events: none;
+}
+.course-style .content .form .inputBox input:focus ~ i,
+.course-style .content .form .inputBox input:valid ~ i
+{
+  transform: translateY(-7.5px);
+  font-size: 0.8em;
+  color: #fff;
+}
+.course-style .content .form .links 
+{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.course-style .content .form .links a 
+{
+  color: #fff;
+  text-decoration: none;
+}
+.course-style .content .form .links a:nth-child(2)
+{
+  color: white;
+  font-weight: 600;
+}
+.course-style .content .form .links a:hover:nth-child(2)
+{
+  color: rgb(0, 205, 0);
+  transition: 0.5s EASE;
+}
+.add-course {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+.container-detials table thead tr th {
+  background: none;
+  color: white;
+}
+.container-detials table thead{
+  background: #0d6efd;
+  
+}
+.add-course .course-style .content .form .inputBox input[type='checkbox'] {
+  width: auto;
+}
+div#id_enrolled_courses > div , div#id_unassigned_courses > div {
+  text-align: left;
+}

@@ -1,0 +1,57 @@
+<!-- users/templates/users/login.html -->
+
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %} Home {% endblock %}
+
+{% block logo %} <img class="dark_logo" src="{% static 'images/logo.png' %}" height="60" alt="logo"> {% endblock %}
+
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+        <a href="/"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Home</button></a>
+        <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">About</button>
+        <button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Timing</button>
+        <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Courses</button>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'login' %}" ><button class="navbuttons">Login</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+
+{% block content %}
+<div class="log-container">
+<form method="post">
+{% csrf_token %}
+<section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+   <div class="signin"> 
+        <div class="content"> 
+            <h2>Log In</h2> 
+            <div class="form"> 
+                <div class="inputBox"> 
+                    {{ form.username }} <i>Username</i> 
+                </div> 
+                <div class="inputBox"> 
+                    {{ form.password }}<i>Password</i> 
+                </div> 
+                <div class="links"> 
+                    <p style="color: white;">Don't have a account?</p>
+                    <a href="{% url 'register' %}">Register</a> 
+                </div> 
+                <div class="inputBox"> 
+                    <button type="submit" class="login-button">Login</button>
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+</section>
+</form>
+</div>
+{% endblock %}

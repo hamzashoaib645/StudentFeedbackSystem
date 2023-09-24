@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Feedback</title>
+</head>
+<body>
+    <h1>Submit Feedback for {{ course.course_name }}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit">Submit Feedback</button>
+    </form>
+    
+    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,102 @@
+Models.py
+class Course(models.Model):
+    course_name = models.CharField(max_length=100)
+    course_code = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.course_name
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True)
+    password = models.CharField(max_length=100)
+    courses = models.ManyToManyField(Course, blank=True)
+
+    def __str__(self):
+        return self.name
+
+Forms.py
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ['course_name', 'course_code']
+
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ['name', 'username', 'password', 'courses']
+        widgets = {
+            'password': forms.PasswordInput(),
+            'courses': forms.CheckboxSelectMultiple,
+        }
+        
+
+Views.py
+def addcourse(request):
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('courses')  # Replace with the appropriate URL after adding a course
+    else:
+        form = CourseForm()
+    return render(request, 'dashboard/addcourse.html', {'form': form})
+
+    """if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('courses')
+    else:
+        form = CourseForm()
+    
+    return render(request, 'dashboard/addcourse.html', {'form': form})"""
+
+def courses(request):
+    courses = Course.objects.all()
+    return render(request, 'dashboard/courses.html', {'courses': courses})
+
+def addteacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('teachers')  # Replace with the appropriate URL after adding a teacher
+    else:
+        form = TeacherForm()
+    return render(request, 'dashboard/addteacher.html', {'form': form})
+
+""" if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('teachers')
+    else:
+        form = TeacherForm()
+    
+    return render(request, 'dashboard/addteacher.html', {'form': form}) """
+
+def teachers(request):
+    teachers = Teacher.objects.all().prefetch_related('courses')  # Fetch all teachers with their courses
+    context = {'teachers': teachers}
+    return render(request, 'dashboard/teachers.html', context)
+
+def addstudent(request):
+    return render(request, 'dashboard/addstudent.html', {'form': form})
+""" if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')  # Replace with the appropriate URL after adding a student
+    else:
+        form = StudentForm()
+    return render(request, 'dashboard/addstudent.html', {'form': form})
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = StudentForm()
+    return render(request, 'dashboard/addstudent.html', {'form': form})"""

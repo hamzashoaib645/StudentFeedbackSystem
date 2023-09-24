@@ -1,0 +1,75 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} Home {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+       <a href="{% url 'addcourse' %}"><button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">Courses</button></a>
+       <a href="{% url 'addteacher' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Teachers</button></a>
+       <a href="{% url 'addstudent' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+{% block content %}
+
+<div class="admin-container">
+    <div class="container-detials">
+        <div class="add-course">
+            <div class="course-style"> 
+                <div class="content"> 
+                    <h2>Add Course</h2> 
+                    <div class="form"> 
+                        <div class="inputBox"> 
+                            {{ form.course_id }} <i>Course ID</i> 
+                        </div> 
+                        <div class="inputBox"> 
+                            {{ form.course_name }}<i>Course Name</i> 
+                        </div> 
+                        <div class="inputBox"> 
+                            <label style="color:white; padding-bottom:10px;">Number of Sections</label>
+                            {{ form.num_sections }}
+                        </div> 
+                        <div class="inputBox"> 
+                            <button type="submit" class="login-button">Create Course</button>
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+    </div>
+
+      <h1>All Courses</h1>
+    <table class="table table-striped mb-0">
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Section</th>
+            <th>Teacher</th>
+        </thead>
+        {% for course in courses %}
+            <tr>
+                <td>{{ course.course_id }}</td>
+                <td>{{ course.course_name }}</td>
+                <td>{{ course.section }}</td>
+                <td>{{ course.teacher.full_name }}</td>
+                <!-- Add more course details here -->
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+    </div>
+{% endblock %}

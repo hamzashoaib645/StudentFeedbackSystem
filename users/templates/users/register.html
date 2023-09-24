@@ -1,0 +1,77 @@
+<!-- users/templates/users/login.html -->
+
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %} Home {% endblock %}
+
+{% block logo %} <img class="dark_logo" src="{% static 'images/logo.png' %}" height="60" alt="logo"> {% endblock %}
+
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+        <a href="/"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Home</button></a>
+        <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">About</button>
+        <button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Timing</button>
+        <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Courses</button>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'login' %}" ><button class="navbuttons">Login</button></a>
+    <a href="{% url 'register' %}"><button class="navbuttons">Register</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+
+{% block content %}
+<div class="log-container">
+<form method="post">
+{% csrf_token %}
+<section> <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span> <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+   <div class="signin"> 
+        <div class="content"> 
+            <h2>Registration</h2> 
+            <div class="form"> 
+                <div class="form-group">
+                    <div class="profile-pic-preview">
+                        <img id="profile-pic-preview" src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg" alt="Profile Picture Preview">
+                    </div>
+                    <label for="{{ form.profile_picture.id_for_label }}" class="custom-file-upload">
+                        Choose File
+                        {{ form.profile_picture }}
+                    </label>
+                </div>
+                <div class="inputBox"> 
+                    {{ form.username.errors }}
+                    {{ form.username }} <i>Username</i> 
+                </div> 
+                <div class="inputBox"> 
+                    {{ form.non_field_errors }}
+                    {{ form.password1 }}<i>Password</i> 
+                </div> 
+                <div class="inputBox"> 
+                    {{ form.password2 }} <i>Confirm Username</i> 
+                </div> 
+                <div class="inputBox"> 
+                    {{ form.user_role.errors }}
+                    <label style="color:white;">Role</label>
+                    {{ form.user_role }}
+                </div> 
+                <div class="links"> 
+                    <p style="color: white;">Already have a account?</p>
+                    <a href="{% url 'login' %}">Log In</a> 
+                </div> 
+                <div class="inputBox"> 
+                    <button type="submit" class="login-button">Register</button>
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+</section>
+</form>
+</div>
+{% endblock %}
