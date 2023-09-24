@@ -14,7 +14,7 @@
        type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
        <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
        <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
@@ -29,10 +29,13 @@
 
 <div class="admin-container">
     <div class="container-detials">
+        <form method="post">
+            {% csrf_token %}
         <div class="add-course">
             <div class="course-style"> 
                 <div class="content"> 
                     <h2>Add Course</h2> 
+                    
                     <div class="form"> 
                         <div class="inputBox"> 
                             {{ form.course_id }} <i>Course ID</i> 
@@ -48,10 +51,11 @@
                             <button type="submit" class="login-button">Create Course</button>
                         </div> 
                     </div> 
+                   
                 </div> 
             </div> 
     </div>
-
+</form>
       <h1>All Courses</h1>
     <table class="table table-striped mb-0">
         <thead>
