@@ -25,11 +25,27 @@
 </div>
 {% endblock %}
 <!-- Nav Bar Code End -->
+
 {% block content %}
-        <h1>Welcome to Admin Dashboard</h1>
-        <script src="" async defer></script>
-        <a href="{% url 'addcourse' %}"><h2>Add Course</h2></a>
-        <a href="{% url 'addcourse' %}"><h2>View Course</h2></a>
-        <a href="{% url 'addteacher' %}"><h2>Add Teacher</h2></a>
-        <a href="{% url 'addstudent' %}"><h2>Add Student</h2></a>
+<center><h1>Feedback from Student {{feedback.registration_number.full_name}}</h1></center>
+    <ul>
+            <li>
+                <strong>Feedback Number:</strong> {{ feedback.feedback_number }}<br>
+                <strong>Course Name:</strong> {{ feedback.course.course_name }} (Section: {{feedback.course.section}})<br>
+                <strong>Registration Number:</strong> {{ feedback.registration_number.registration_number }}<br>
+                <strong>Question 1: How would you rate the effectiveness of the teaching methods used in this course?</strong> <br>
+                <strong>Answer: </strong>{{ feedback.Q1 }}<br>
+                <strong>Question 2: Were you satisfied with the relevance and comprehensiveness of the course materials?</strong> <br>
+                <strong>Answer: </strong>{{ feedback.Q1 }}<br>
+                <strong>Question 3: Did you find the assessments (exams, quizzes, projects) fair and reflective of your understanding?</strong> <br>
+                <strong>Answer: </strong>{{ feedback.Q1 }}<br>
+                <strong>Question 4: How would you rate the quality and usefulness of the lab sessions and facilities?</strong> <br>
+                <strong>Answer: </strong>{{ feedback.Q1 }}<br>
+                <strong>Question 5: What is your overall assessment of this course, and do you have any suggestions for improvement?</strong> <br>
+                <strong>Answer: </strong>{{ feedback.Q1 }}<br>
+                <a href="{% url 'feedbacks'%}"><strong>Feedback List</strong></a><br>
+                <!-- Add other fields as needed -->
+            </li>
+            <hr>
+    </ul>
 {% endblock %}

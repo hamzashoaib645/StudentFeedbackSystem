@@ -85,9 +85,11 @@ def profile(request):
         else:
             # Pre-fill the form with the teacher's existing data
             form = TeacherProfileForm(instance=teacher)
+        
+        context = {'form': form}
+        return render(request, 'users/profile.html', context)    
 
-    context = {'form': form}
-    return render(request, 'users/profile.html', context)
+    return render(request, 'users/profile.html')
 
         
 
@@ -158,21 +160,23 @@ def addstudent(request):
     if request.method == 'POST':
         form = StudentForm(request.POST)
         if form.is_valid():
+            # Save the student instance with selected courses
+            student = form.save()
+
+            # Create a CustomUser instance for the student
             username1 = form.cleaned_data['registration_number']
             password1 = form.cleaned_data['password']
             role = form.cleaned_data['role']
             hashed_password = make_password(password1)
             custom_user = CustomUser(username=username1, password=hashed_password, user_role=role)
             custom_user.save()
-            
-            student = form.save()  # Save the student instance with selected courses
+
             return redirect('addstudent')  # Redirect to a page displaying a list of students
     else:
         form = StudentForm()
-    
+
     students = Student.objects.all()
-    context = {'form': form,
-               'students': students}
+    context = {'form': form, 'students': students}
     return render(request, 'dashboard/addstudent.html', context)
 
 @login_required

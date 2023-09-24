@@ -1,0 +1,25 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} Home {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+        <a href="/"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Home</button></a>
+        <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">About</button>
+        <button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Timing</button>
+        <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Courses</button>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="login" ><button class="navbuttons">Login</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+
+{% block content %}
+<h1>Home Page </h1>
+{% endblock %}
