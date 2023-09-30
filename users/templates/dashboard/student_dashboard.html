@@ -1,38 +1,58 @@
 {% extends 'dashboard/base.html' %}
-{% load static %}
-{% block title %} Home {% endblock %}
-
-
+{% block title %} Student Dashboard {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
-    <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
-        <a href="/"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-       type="button" role="tab" aria-controls="home" aria-selected="true">Home</button></a>
-        <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
-       type="button" role="tab" aria-controls="about" aria-selected="false">About</button>
-        <button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
-       type="button" role="tab" aria-controls="timing" aria-selected="false">Timing</button>
-        <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
-       type="button" role="tab" aria-controls="courses" aria-selected="false">Courses</button>
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+        <a href="{% url 'home' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">Home</button></a>
+        <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+        <a href="{% url 'addteacher' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+        type="button" role="tab" aria-controls="timing" aria-selected="false">Feedback Guide</button></a>
+        <a href="{% url 'addstudent' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Contact Us</button></a>
     </div>
 </nav>
 <div class="position-relative d-inline-block me-lg-4">
-    <a href="{% url 'profile' %}" ><button class="navbuttons">Profile</button></a>
-    <a href="{% url 'logout' %}"><button class="navbuttons">Logout</button></a>
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
 </div>
 {% endblock %}
 <!-- Nav Bar Code End -->
 {% block content %}
-<h1>Welcome, {{ student.full_name }}!</h1>
-  <h2>Your Enrolled Courses:</h2>
-  <ul>
-    {% for course in enrolled_courses %}
-      <li>
-        {{ course.course_name }} - Section {{ course.section }}
-        <a href="{% url 'submitfeedback' course.pk %}">Submit Feedback</a>
-      </li>
-    {% endfor %}
-  </ul>
-
+    <div class="dashboard-contain">
+        <div class="one">
+            <center><h1 class="dashboard-heading">Welcome, {{ student.full_name }}!</h1></center>
+        </div>
+        
+        <div class="feedback-details">
+        <center>
+            <h2>Your Enrolled Courses:</h2>
+            <table style=" width: 70%;
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Teacher</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for course in enrolled_courses %}
+                <tr>
+                    <td>{{ course.course_name }} - Section {{ course.section }}</td>
+                    <td>{{course.teacher}} </td>
+                    <td><a href="{% url 'submitfeedback' course.pk %}" class="explore-now">Submit Feedback</a></td>
+                </tr>
+                {% empty %}
+                    <p>No Course left for feedback!</p>
+                {% endfor %}
+                </tbody>
+            </table>
+        </center>
+    </div>
 {% endblock %}

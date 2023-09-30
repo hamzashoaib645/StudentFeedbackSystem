@@ -1,17 +1,20 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Home {% endblock %}
+{% load static %}
+{% block title %} Student Feedback System {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
     <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
         <a href="/"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
        type="button" role="tab" aria-controls="home" aria-selected="true">Home</button></a>
-        <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
-       type="button" role="tab" aria-controls="about" aria-selected="false">About</button>
-        <button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
-       type="button" role="tab" aria-controls="timing" aria-selected="false">Timing</button>
-        <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
-       type="button" role="tab" aria-controls="courses" aria-selected="false">Courses</button>
+       <a href="#about"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">About</button></a>
+       <a href="/"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Get Password</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Gallery</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Contact</button></a>
     </div>
 </nav>
 <div class="position-relative d-inline-block me-lg-4">
@@ -21,5 +24,270 @@
 <!-- Nav Bar Code End -->
 
 {% block content %}
-<h1>Home Page </h1>
+<div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 align-self-center">
+              <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h6>Student Feedback System</h6>
+                    <h2>Welcome to the University of Poonch Rawalakot</h2>
+                    <p><b>Dear Students,</b>
+                    <br> Welcome to the Student Feedback System! <br>Your voice matters, and we're here to ensure that your feedback helps shape the future of our university.</p>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="border-first-button scroll-to-section">
+                      <a href="{% url 'dashboard' %}" class="submit-feedback">Submit Your Feedback</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div id="lottie-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="about" class="about section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="about-left-image  wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div id="lottie-container2"></div>
+              </div>
+            </div>
+            <div class="col-lg-6 align-self-center  wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+              <div class="about-right-content">
+                <div class="section-heading">
+                  <h6>About Us</h6>
+                  <h4>How to respond to <em>Feedback?</em></h4>
+                  <div class="line-dec"></div>
+                </div>
+                <pre>* Fill out all required fields.<br>* Write about what you feel for the particular.<br>* Suggestions if any.</pre>
+                <p>As good and effective educators, we always want to improve. Improvement is something we instill in our students and it would be hypocritical to not expect the same from ourselves. Students are the center of our classroom and they are where we can find the most relevant information about how to be better at our jobs. If we are not delivering effectively to the students how can we ever expect better satisfaction hopefully.</p>
+                <div class="row">
+                    <a href="{% url 'dashboard' %}" class="submit-feedback">Send Us Feedback</a>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="free-quote" class="free-quote">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+          <div class="section-heading  wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h6>Not able to login?</h6>
+            <h4>Ping us now and get your password.</h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+        <div class="col-lg-8 offset-lg-2  wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+          <form id="search" action="#" method="GET">
+            <div class="row">
+              <div class="col-lg-4 col-sm-4">
+                <fieldset>
+                    <input type="address" name="address" class="email" placeholder="Email Address..." autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-4 col-sm-4">
+                <fieldset>
+                    <input type="text" name="registration_number" class="website" placeholder="Your Registration NumberL..." autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-4 col-sm-4">
+                <fieldset>
+                  <button type="submit" class="main-button">Get Password Now</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="portfolio" class="our-portfolio section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h6>Our Portofolio</h6>
+            <h4>See Our Recent <em>Projects</em></h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="loop owl-carousel">
+            <div class="item">
+              <a href="#">
+                <div class="portfolio-item">
+                <div class="thumb">
+                  <img src="{% static 'images/logo.png' %}" alt="">
+                </div>
+                <div class="down-content">
+                  
+                  
+                </div>
+              </div>
+              </a>  
+            </div>
+            <div class="item">
+              <a href="#">
+                <div class="portfolio-item">
+                <div class="thumb">
+                  <img src="{% static 'images/logo.png' %}" alt="">
+                </div>
+                <div class="down-content">
+                  
+                  
+                </div>
+              </div>
+              </a>  
+            </div>
+            <div class="item">
+              <a href="#">
+                <div class="portfolio-item">
+                <div class="thumb">
+                  <img src="{% static 'images/logo.png' %}" alt="">
+                </div>
+                <div class="down-content">
+                  
+                  
+                </div>
+              </div>
+              </a>  
+            </div>
+            <div class="item">
+              <a href="#">
+                <div class="portfolio-item">
+                <div class="thumb">
+                  <img src="{% static 'images/logo.png' %}" alt="">
+                </div>
+                <div class="down-content">
+                  
+                  
+                </div>
+              </div>
+              </a>  
+            </div>
+            <div class="item">
+              <a href="#">
+                <div class="portfolio-item">
+                <div class="thumb">
+                  <img src="{% static 'images/logo.png' %}" alt="">
+                </div>
+                <div class="down-content">
+                  
+                  
+                </div>
+              </div>
+              </a>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact" class="contact-us section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h6>Contact Us</h6>
+            <h4>Get In Touch With Us <em>Now</em></h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+        <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
+          <form id="contact" action="" method="post">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="contact-dec">
+                  <img src="{% static 'images/contact-dec-v3.png' %}" alt="">
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div id="map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.680355437351!2d73.77192127579404!3d33.846353028573596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e06bc100eec5a5%3A0x598138442c799865!2sUniversity%20of%20Poonch%20Rawalakot!5e0!3m2!1sen!2s!4v1696002355877!5m2!1sen!2s" width="100%" height="636px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="fill-form">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="info-post">
+                        <div class="icon">
+                          <img src="{% static 'images/phone-icon.png' %}" alt="">
+                          <a href="tel:+925824960053"> +92 5824-960053</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="info-post">
+                        <div class="icon">
+                          <img src="{% static 'images/email-icon.png' %}" alt="">
+                          <a href="mailto:info@upr.edu.pk">info@upr.edu.pk</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="info-post">
+                        <div class="icon">
+                          <img src="{% static 'images/location-icon.png' %}" alt="">
+                          <a href="https://maps.app.goo.gl/ZZhzAiJ9gmYch2K47">UPR</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input type="name" name="name" id="name" placeholder="Name" autocomplete="on" required>
+                      </fieldset>
+                      <fieldset>
+                        <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
+                      </fieldset>
+                      <fieldset>
+                        <input type="subject" name="subject" id="subject" placeholder="Subject" autocomplete="on">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <textarea name="message" type="text" class="form-control" id="message" placeholder="Message" required=""></textarea>  
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="main-button ">Send Message Now</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 {% endblock %}

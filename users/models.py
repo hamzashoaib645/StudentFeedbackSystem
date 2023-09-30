@@ -49,3 +49,10 @@ class Student(models.Model):
         enrolled_courses_str = ", ".join([f" {course.course_name} - {course.section}" for course in self.enrolled_courses.all()])
         return f"{self.full_name} - Semester: {self.semester} ({self.registration_number}) enrolled in: {enrolled_courses_str}"
 
+class Chairperson(models.Model):
+    full_name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True, primary_key=True)
+    password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.full_name}"

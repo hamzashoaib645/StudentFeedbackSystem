@@ -7,11 +7,9 @@ from .models import CustomUser
 from django.contrib import messages
 from .forms import CustomProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
-from .models import Teacher , Course, Student
-from .forms import TeachersForm, CoursesForm, StudentForm, TeacherProfileForm
+from .models import Teacher , Course, Student, Chairperson
+from .forms import TeachersForm, CoursesForm, StudentForm, TeacherProfileForm, ChairpersonForm
 from django.contrib.auth.hashers import make_password
-
-
 
 
 def home(request):
@@ -122,62 +120,104 @@ def addcourse(request):
 
 @login_required
 def addteacher(request):
-    if request.method == "POST":
-        form = TeachersForm(request.POST)
-        if form.is_valid():
+    user = request.user
+    if user.is_superuser:
+        if request.method == "POST":
+            form = TeachersForm(request.POST)
+            if form.is_valid():
             # Save the teacher without committing to the database
-            username1 = form.cleaned_data['username']
-            password1 = form.cleaned_data['password']
-            role = form.cleaned_data['role']
+                username1 = form.cleaned_data['username']
+                password1 = form.cleaned_data['password']
+                role = form.cleaned_data['role']
             
-            teacher = form.save(commit=False)
-            hashed_password = make_password(password1)
+                teacher = form.save(commit=False)
+                hashed_password = make_password(password1)
             # Save the teacher instance to get the primary key (username)
-            teacher.save()
+                teacher.save()
             
             # Get the selected courses from the form
-            selected_courses = form.cleaned_data.get('unassigned_courses')
+                selected_courses = form.cleaned_data.get('unassigned_courses')
             
-            custom_user = CustomUser(username=username1, password=hashed_password, user_role=role)
-            custom_user.save()
+                custom_user = CustomUser(username=username1, password=hashed_password, user_role=role)
+                custom_user.save()
             # Assign the teacher to the selected courses
-            for course in selected_courses:
-                course.teacher = teacher
-                course.save()
+                for course in selected_courses:
+                    course.teacher = teacher
+                    course.save()
             
             # Redirect to a success page or wherever you want
-            return redirect('addteacher')
-    else:
-        form = TeachersForm()
-    teachers = Teacher.objects.all()
-    context = {'form': form,
+                return redirect('addteacher')
+        else:
+            form = TeachersForm()
+        teachers = Teacher.objects.all()
+        context = {'form': form,
                'teachers': teachers}
-    return render(request, 'dashboard/addteacher.html', context)
+        return render(request, 'dashboard/addteacher.html', context)
+    else:
+        return HttpResponse("404 Not Found!")
 
 
 @login_required
 def addstudent(request):
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-            # Save the student instance with selected courses
-            student = form.save()
+    user = request.user
+    if user.is_superuser:
+        if request.method == 'POST':
+            form = StudentForm(request.POST)
+            if form.is_valid():
+                # Save the student instance with selected courses
+                student = form.save()
 
-            # Create a CustomUser instance for the student
-            username1 = form.cleaned_data['registration_number']
-            password1 = form.cleaned_data['password']
-            role = form.cleaned_data['role']
-            hashed_password = make_password(password1)
-            custom_user = CustomUser(username=username1, password=hashed_password, user_role=role)
-            custom_user.save()
+                # Create a CustomUser instance for the student
+                username1 = form.cleaned_data['registration_number']
+                password1 = form.cleaned_data['password']
+                role = form.cleaned_data['role']
+                hashed_password = make_password(password1)
+                custom_user = CustomUser(username=username1, password=hashed_password, user_role=role)
+                custom_user.save()
 
-            return redirect('addstudent')  # Redirect to a page displaying a list of students
+                return redirect('addstudent')  # Redirect to a page displaying a list of students
+        else:
+            form = StudentForm()
+
+        students = Student.objects.all()
+        context = {'form': form, 'students': students}
+        return render(request, 'dashboard/addstudent.html', context)
     else:
-        form = StudentForm()
+        return HttpResponse("404 Not Found!")
 
-    students = Student.objects.all()
-    context = {'form': form, 'students': students}
-    return render(request, 'dashboard/addstudent.html', context)
+@login_required
+def addchairperson(request):
+    user = request.user
+    if user.is_superuser:
+        if request.method == "POST":
+            form = ChairpersonForm(request.POST)
+            if form.is_valid():
+                # Save the chairperson without committing to the database
+                username1 = form.cleaned_data['username']
+                password1 = form.cleaned_data['password']
+                role = form.cleaned_data['role']
+
+                # Hash the password
+                hashed_password = make_password(password1)
+
+            # Save the chairperson instance to get the primary key (username)
+                chairperson = Chairperson(username=username1, password=hashed_password, full_name=form.cleaned_data['full_name'])
+                chairperson.save()
+
+            # Create a CustomUser instance for the chairperson
+                custom_user = CustomUser(username=username1, password=hashed_password, user_role=role)
+                custom_user.save()
+
+                # Redirect to a success page or wherever you want
+                return redirect('addchairperson')
+        else:
+            form = ChairpersonForm()
+
+        chairpersons = Chairperson.objects.all()
+        context = {'form': form, 'chairpersons': chairpersons}
+        return render(request, 'dashboard/addchairperson.html', context)
+    else:
+        return HttpResponse("404 Not Found!")
 
 @login_required
 def dashboard(request):

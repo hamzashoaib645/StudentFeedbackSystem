@@ -1,0 +1,83 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} Home {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+       <a href="{% url 'addcourse' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">Courses</button></a>
+       <a href="{% url 'addteacher' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Teachers</button></a>
+       <a href="{% url 'addstudent' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
+       <a href="{% url 'addchairperson' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+{% block content %}
+
+<div class="admin-container">
+    <div class="container-detials">
+        <form method="post">
+            {% csrf_token %}
+            <div class="add-course">
+                <div class="course-style" style="width: 800px; margin-top: 20px;"> 
+                    <div class="content"> 
+                        <h2>Add Chairperson</h2> 
+                        <div class="form"> 
+                            {{ form.non_field_errors }}  {# Display non-field-specific errors #}
+                            <div class="inputBox"> 
+                                {{ form.full_name.errors }}
+                                {{ form.full_name }} <i>Full Name</i> 
+                            </div> 
+                            <div class="inputBox"> 
+                                {{ form.username.errors }}
+                                {{ form.username }}<i>Username</i> 
+                            </div>
+                            <div class="inputBox"> 
+                                {{ form.password.errors }}
+                                {{ form.password }}<i>Password</i> 
+                                {{form.role}}
+                            </div>
+                            <div class="inputBox"> 
+                                <button type="submit" class="login-button">Add Chairperson</button>
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+        </form>
+        
+        <h1>All Chairperson</h1>
+        <table class="table table-striped mb-0">
+            <thead>
+                <th>Full Name</th>
+                <th>Username</th>
+            </thead>
+            {% for Chairperson in chairpersons %}
+            <tr>
+                <td>{{ Chairperson.full_name }}</td>
+                <td>{{ Chairperson.username }}</td>
+                <!-- Add more course details here -->
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="dashboard">
+    <a href="{% url 'dashboard' %}">
+        <button class="button-89" role="button">Back to Dashboard</button>
+    </a>
+</div>
+{% endblock %}

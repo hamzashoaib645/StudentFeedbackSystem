@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from .models import CustomUser
 from django.contrib.auth.forms import PasswordChangeForm
-from .models import Course , Teacher, Student
+from .models import Course , Teacher, Student, Chairperson
 
 
 class CustomUserCreationForm(forms.ModelForm):
@@ -170,3 +170,10 @@ class StudentForm(forms.ModelForm):
         required=False  # Students can choose not to enroll in any courses initially
     )
 
+class ChairpersonForm(forms.ModelForm):
+    
+    role = forms.CharField(widget=forms.HiddenInput(), initial="chairperson")
+
+    class Meta:
+        model = Chairperson
+        fields = ['full_name', 'username', 'password']

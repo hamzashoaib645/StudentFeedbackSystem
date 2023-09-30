@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>{% block title %} Student Feedback System {% endblock %}</title>
@@ -11,7 +17,18 @@
     <link rel="stylesheet" href="{% static '/css/style.css'%}">
 </head>
 <body>
-    
+    <div id="js-preloader" class="js-preloader">
+        <img class="logo pre-loader" src="{% static 'images/logo.png' %}" alt="logo"><br>
+        <div class="preloader-inner">
+            
+          <span class="dot"></span>
+          <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
     <nav class="navbar navbar-expand-lg ">
         <div class="pe-lg-0 ps-lg-5 container-fluid justify-content-between">
             <a class="navbar-brand" href="/">
@@ -51,22 +68,14 @@
     <footer class="footer-07">
         <div class="footer-container">
             <div class="row justify-content-center">
-                <div class="col-md-12 text-center">
-                    <h2 class="footer-heading"><a href="#" class="logo">
-                        <img class="footer-logo" src="{% static 'images/logo.png' %}"></a></h2>
-                    <p class="menu">
-                        <a href="#">Home</a>
-                        <a href="#">Agent</a>
-                        <a href="#">About</a>
-                        <a href="#">Listing</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Contact</a>
-                    </p>
-                    <ul class="ftco-footer-social p-0">
-          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
-          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
-          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
-        </ul>
+                <div class="col-md-12 text-center" style="width:50%;">
+                    <h2 class="footer-heading">
+                        <a href="{% url 'home' %}" class="logo">
+                            <img class="footer-logo" src="{% static 'images/logo.png' %}">
+                            <h2 class="logo-name">UNIVERSITY OF POONCH RAWALAKOT</h2>
+                        </a>
+                    </h2>
+
                 </div>
             </div>
             <div class="row mt-5">
@@ -99,6 +108,48 @@
             }
         });
     </script>
+    <script src="{% static '/js/owl-carousel.js' %}"></script>
+    <script src="{% static '/js/animation.js' %}"></script>
+    <script src="{% static '/js/imagesloaded.js' %}"></script>
+    <script src="{% static '/js/custom.js' %}"></script>
     
+    <script>
+        // Replace 'path/to/your/abc.json' with the actual path to your Lottie JSON file
+        const animationData = "{% static '/js/animation_ln4ptsxs.json' %}";
+      
+        // Replace 'lottie-container' with the ID of your container element
+        const container = document.getElementById('lottie-container');
+      
+        const anim = lottie.loadAnimation({
+          container: container,
+          renderer: 'svg', // 'svg' or 'canvas'
+          loop: true,
+          autoplay: true,
+          path: animationData,
+        });
+      </script>
+      <script>
+        // Replace 'path/to/your/abc.json' with the actual path to your Lottie JSON file
+        const animationData2 = "{% static '/js/animation_ln4uxcx0.json' %}";
+      
+        // Replace 'lottie-container' with the ID of your container element
+        const container2 = document.getElementById('lottie-container2');
+      
+        const anim2 = lottie.loadAnimation({
+          container: container2,
+          renderer: 'svg', // 'svg' or 'canvas'
+          loop: true,
+          autoplay: true,
+          path: animationData2,
+        });
+      </script>
 </body>
 </html>
+
+
+
+
+
+
+
+

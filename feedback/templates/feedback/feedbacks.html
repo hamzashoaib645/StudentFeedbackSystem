@@ -1,10 +1,10 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} Feedbacks {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
     <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
-        <a href="{% url 'dashboard' %}"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+        <a href="{% url 'dashboard' %}"><button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
        type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
        <a href="{% url 'addcourse' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
        type="button" role="tab" aria-controls="about" aria-selected="false">Courses</button></a>
@@ -12,9 +12,9 @@
        type="button" role="tab" aria-controls="timing" aria-selected="false">Teachers</button></a>
        <a href="{% url 'addstudent' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'addchairperson' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
-       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
        <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
@@ -27,19 +27,49 @@
 <!-- Nav Bar Code End -->
 
 {% block content %}
-<h1>Feedback List</h1>
-    <ul>
+<div class="dashboard-contain">
+    <div class="one">
+        <center><h1 class="dashboard-heading">Feedbacks</h1></center>
+    </div>
+    <div class="feedback-details">
+    <center><table style=" width: 70%;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+        <thead>
+            <tr>
+                <th>Feedback Number</th>
+                <th>Course</th>
+                <th>Submit By</th>
+                <th>Explore</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for feedback in feedbacks %}
-            <li>
-                <strong>Feedback Number:</strong> {{ feedback.feedback_number }}<br>
-                <strong>Course Name:</strong> {{ feedback.course.course_name }} (Section: {{feedback.course.section}})<br>
-                <strong>Registration Number:</strong> {{ feedback.registration_number.registration_number }}<br>
-                <a href="{% url 'feedback' feedback.feedback_number %}"><strong>Explore Feedback</strong></a><br>
-                <!-- Add other fields as needed -->
-            </li>
-            <hr>
+        <tr>
+            <td>{{feedback.feedback_number}}</td>
+            <td>{{feedback.course.course_name}} (Section: {{feedback.course.section}})</td>
+            <td>{{feedback.registration_number.registration_number}}</td>
+            <td>
+                <a href="{% url 'feedback' feedback.feedback_number %}" class="explore-now">Explore Now</a>
+                <a href="{% url 'delete_feedback' feedback.feedback_number %}" class="explore-now" style="background:red;">Delete</a>
+            </td>
+        </tr>
         {% empty %}
             <p>No feedbacks available.</p>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
+</center>
+</div>
+</div>
+    
+
+    <div class="dashboard">
+        <a href="{% url 'dashboard' %}">
+            <button class="button-89" role="button">Back to Dashboard</button>
+        </a>
+    </div>
+
+    
 {% endblock %}

@@ -14,7 +14,7 @@ urlpatterns = [
     #path('dashboard/courses/', views.courses, name='courses'),
     path('dashboard/addcourse/', views.addcourse, name='addcourse'),
     path('dashboard/addteacher/', views.addteacher, name='addteacher'),
-    #path('dashboard/teachers/', views.teachers, name='teachers'),
+    path('dashboard/addchairperson/', views.addchairperson, name='addchairperson'),
     path('dashboard/addstudent/', views.addstudent, name='addstudent'),
     #path('dashboard/students/', views.students, name='teachers'),
     # Add other URLs as needed
