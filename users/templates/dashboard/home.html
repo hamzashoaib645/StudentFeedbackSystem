@@ -9,16 +9,24 @@
        type="button" role="tab" aria-controls="home" aria-selected="true">Home</button></a>
        <a href="#about"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
        type="button" role="tab" aria-controls="about" aria-selected="false">About</button></a>
-       <a href="/"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       <a href="#free-quote"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
        type="button" role="tab" aria-controls="timing" aria-selected="false">Get Password</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="#portfolio"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Gallery</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="#contact"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Contact</button></a>
+        {% if access == True %}
+        <a href="dashboard"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+            type="button" role="tab" aria-controls="about" aria-selected="false">Dashboard</button></a>
+    {% endif %}
     </div>
 </nav>
 <div class="position-relative d-inline-block me-lg-4">
-    <a href="login" ><button class="navbuttons">Login</button></a>
+  {% if access == True %}
+    <a href="logout" ><button class="navbuttons">Logout</button></a>
+  {% else %}
+  <a href="login" ><button class="navbuttons">Login</button></a>
+  {% endif %}
 </div>
 {% endblock %}
 <!-- Nav Bar Code End -->
@@ -127,8 +135,8 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <h6>Our Portofolio</h6>
-            <h4>See Our Recent <em>Projects</em></h4>
+            <h6>Gallery</h6>
+            <h4>See Our Recent <em>Events</em></h4>
             <div class="line-dec"></div>
           </div>
         </div>
@@ -142,12 +150,9 @@
               <a href="#">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{% static 'images/logo.png' %}" alt="">
+                  <img src="https://www.upr.edu.pk/uploads/1686554263IMG-20230612-WA0050.jpg" alt="">
                 </div>
-                <div class="down-content">
-                  
-                  
-                </div>
+                
               </div>
               </a>  
             </div>
@@ -155,12 +160,9 @@
               <a href="#">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{% static 'images/logo.png' %}" alt="">
+                  <img src="https://www.upr.edu.pk/uploads/1686553971IMG-20230612-WA0064.jpg" alt="">
                 </div>
-                <div class="down-content">
-                  
-                  
-                </div>
+                
               </div>
               </a>  
             </div>
@@ -168,12 +170,9 @@
               <a href="#">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{% static 'images/logo.png' %}" alt="">
+                  <img src="https://www.upr.edu.pk/uploads/1686553936IMG-20230612-WA0060.jpg" alt="">
                 </div>
-                <div class="down-content">
-                  
-                  
-                </div>
+                
               </div>
               </a>  
             </div>
@@ -181,12 +180,9 @@
               <a href="#">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{% static 'images/logo.png' %}" alt="">
+                  <img src="https://www.upr.edu.pk/uploads/1686553895IMG-20230612-WA0065.jpg" alt="">
                 </div>
-                <div class="down-content">
-                  
-                  
-                </div>
+                
               </div>
               </a>  
             </div>
@@ -194,12 +190,29 @@
               <a href="#">
                 <div class="portfolio-item">
                 <div class="thumb">
-                  <img src="{% static 'images/logo.png' %}" alt="">
+                  <img src="https://www.upr.edu.pk/uploads/1686033020IMG-20230606-WA0019.jpg" alt="">
                 </div>
-                <div class="down-content">
-                  
-                  
+                
+              </div>
+              </a>  
+            </div>
+            <div class="item">
+              <a href="#">
+                <div class="portfolio-item">
+                <div class="thumb">
+                  <img src="https://www.upr.edu.pk/uploads/1686032533IMG-20230606-WA0018.jpg" alt="">
                 </div>
+                
+              </div>
+              </a>  
+            </div>
+            <div class="item">
+              <a href="#">
+                <div class="portfolio-item">
+                <div class="thumb">
+                  <img src="https://www.upr.edu.pk/uploads/1685358619IMG-20230529-WA0017.jpg" alt="">
+                </div>
+                
               </div>
               </a>  
             </div>
@@ -259,26 +272,29 @@
                         </div>
                       </div>
                     </div>
+                    <form method="post">
+                      {% csrf_token %}
                     <div class="col-lg-6">
                       <fieldset>
-                        <input type="name" name="name" id="name" placeholder="Name" autocomplete="on" required>
+                        {{ form.name }}
                       </fieldset>
                       <fieldset>
-                        <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
+                        {{ form.email }}
                       </fieldset>
                       <fieldset>
-                        <input type="subject" name="subject" id="subject" placeholder="Subject" autocomplete="on">
+                        {{ form.subject }}
                       </fieldset>
                     </div>
                     <div class="col-lg-6">
                       <fieldset>
-                        <textarea name="message" type="text" class="form-control" id="message" placeholder="Message" required=""></textarea>  
+                        {{ form.message }}
                       </fieldset>
                     </div>
                     <div class="col-lg-12">
                       <fieldset>
                         <button type="submit" id="form-submit" class="main-button ">Send Message Now</button>
                       </fieldset>
+                    </form>
                     </div>
                   </div>
                 </div>

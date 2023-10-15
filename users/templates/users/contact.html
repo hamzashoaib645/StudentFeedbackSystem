@@ -1,0 +1,114 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %} Contact - Student Dashboard {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+        <a href="{% url 'home' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">Home</button></a>
+        <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+        <a href="{% url 'feedbackguide' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+        type="button" role="tab" aria-controls="timing" aria-selected="false">Feedback Guide</button></a>
+        <a href="{% url 'contact' %}"> <button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Contact Us</button></a>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+
+{% block content %}
+<div id="contact" class="contact-us section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h6>Contact Us</h6>
+            <h4>Get In Touch With Us <em>Now</em></h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+        <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
+          <form id="contact" action="" method="post">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="contact-dec">
+                  <img src="{% static 'images/contact-dec-v3.png' %}" alt="">
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div id="map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.680355437351!2d73.77192127579404!3d33.846353028573596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e06bc100eec5a5%3A0x598138442c799865!2sUniversity%20of%20Poonch%20Rawalakot!5e0!3m2!1sen!2s!4v1696002355877!5m2!1sen!2s" width="100%" height="636px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="fill-form">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="info-post">
+                        <div class="icon">
+                          <img src="{% static 'images/phone-icon.png' %}" alt="">
+                          <a href="tel:+925824960053"> +92 5824-960053</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="info-post">
+                        <div class="icon">
+                          <img src="{% static 'images/email-icon.png' %}" alt="">
+                          <a href="mailto:info@upr.edu.pk">info@upr.edu.pk</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="info-post">
+                        <div class="icon">
+                          <img src="{% static 'images/location-icon.png' %}" alt="">
+                          <a href="https://maps.app.goo.gl/ZZhzAiJ9gmYch2K47">UPR</a>
+                        </div>
+                      </div>
+                    </div>
+                    <form method="post">
+                      {% csrf_token %}
+                    <div class="col-lg-6">
+                      <fieldset>
+                        {{ form.name }}
+                      </fieldset>
+                      <fieldset>
+                        {{ form.email }}
+                      </fieldset>
+                      <fieldset>
+                        {{ form.subject }}
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        {{ form.message }}
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="main-button ">Send Message Now</button>
+                      </fieldset>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <div class="dashboard">
+    <a href="{% url 'dashboard' %}">
+        <button class="button-89" role="button">Back to Dashboard</button>
+    </a>
+</div>
+  {% endblock %}

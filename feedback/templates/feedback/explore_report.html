@@ -1,5 +1,5 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Feedbacks {% endblock %}
+{% block title %} Explore Report {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
@@ -15,7 +15,7 @@
        type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
        <a href="{% url 'addchairperson' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
-       <a href="{% url 'sentiment_analysis_results' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
        <a href="{% url 'view_reports' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
@@ -24,9 +24,9 @@
     <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
         <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
        type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
-       <a href="{% url 'feedbacks' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
-       <a href="{% url 'sentiment_analysis_results' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Sentiment Results</button></a>
        <a href="{% url 'view_reports' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
@@ -42,42 +42,35 @@
 {% block content %}
 <div class="dashboard-contain">
     <div class="one">
-        <center><h1 class="dashboard-heading">Feedbacks</h1></center>
+        <center><h1 class="dashboard-heading">Report Submit by {{reports.username}}</h1></center>
     </div>
-    <div class="feedback-details">
-    <center><table style=" width: 70%;
-    border-collapse: collapse;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);">
-        <thead>
-            <tr>
-                <th>Feedback Number</th>
-                <th>Course</th>
-                {% if access == 'admin' %}<th>Submit By</th>{% endif %}
-                <th>Explore</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for feedback in feedbacks %}
-        <tr>
-            <td>{{feedback.feedback_number}}</td>
-            <td>{{feedback.course.course_name}} (Section: {{feedback.course.section}})</td>
-            {% if access == 'admin' %}<td>{{feedback.registration_number.registration_number}}</td>{% endif %}
-            <td>
-                <a href="{% url 'feedback' feedback.feedback_number %}" class="explore-now">Explore Now</a>
-                {% if access == 'admin' %}<a href="{% url 'delete_feedback' feedback.feedback_number %}" class="explore-now" style="background:red;">Delete</a>{% endif %}
-            </td>
-        </tr>
-        {% empty %}
-            <p>No feedbacks available.</p>
-        {% endfor %}
-        </tbody>
-    </table>
-</center>
-</div>
-</div>
-    
+    <div class="ayalysis-chart" style="
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center; padding-top: 40px; padding-bottom: 40px;">
+        <div class="analysis-details" style="    padding: 60px;
+        width: 30%;
+        border: 2px dashed green;
+        height: 100%;">
+            <p><strong>Total Feedbacks:</strong> {{ reports.total_feedbacks }}</p>
 
+        <p><b>Positive:</b> {{ reports.positive_percentage }}%</p>
+        <p><b>Negative: </b>{{ reports.negative_percentage }}%</p>
+        <p><b>Neutral: </b>{{ reports.neutral_percentage }}%</p>
+        </div>
+    <!-- Graph Code -->
+    <div class="anaylsis-pie" style="width: 30%; padding-left: 50px;">
+    <canvas id="sentimentChart" width="300" height="300" style="max-width: 300px !important; max-height: 300px !important;"></canvas>
+    </div>
+    
+    </div>
+</div>
+<center><h1 class="dashboard-heading">Report</h1></center>
+<div class="report-message">
+    
+    <p style="width: 60%; padding: 5px; border: 2px dashed;">{{reports.report_message}}</p>
+</div>
     <div class="dashboard">
         <a href="{% url 'dashboard' %}">
             <button class="button-89" role="button">Back to Dashboard</button>
@@ -85,7 +78,27 @@
         <a href="{% url 'sentiment_analysis_results' %}">
             <button class="button-89" role="button">Sentiment Analysis</button>
         </a>
+        <a href="{% url 'view_reports' %}">
+            <button class="button-89" role="button">All Reports</button>
+        </a>
     </div>
 
-    
+    <script>
+        var ctx = document.getElementById('sentimentChart').getContext('2d');
+        var data = {
+            labels: ['Positive(%)', 'Negative(%)', 'Neutral(%)'],
+            datasets: [{
+                data: [{{ reports.positive_percentage }}, {{ reports.negative_percentage }}, {{ reports.neutral_percentage }}],
+                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+            }]
+        };
+        var options = {
+            responsive: true,
+        };
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    </script>
 {% endblock %}

@@ -7,6 +7,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home, name='home'),
     path('register/', views.register, name='register'),
+    path('dashboard/submissions/', views.submissionlist, name='submissions'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('login/', views.user_login, name='login'),
     path('profile/', views.profile, name='profile'),
@@ -16,6 +17,7 @@ urlpatterns = [
     path('dashboard/addteacher/', views.addteacher, name='addteacher'),
     path('dashboard/addchairperson/', views.addchairperson, name='addchairperson'),
     path('dashboard/addstudent/', views.addstudent, name='addstudent'),
+    path('contact/', views.contact, name='contact'),
     #path('dashboard/students/', views.students, name='teachers'),
     # Add other URLs as needed
 ]

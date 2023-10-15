@@ -1,5 +1,5 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Feedbacks {% endblock %}
+{% block title %} Reports {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
@@ -15,20 +15,20 @@
        type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
        <a href="{% url 'addchairperson' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
-       <a href="{% url 'sentiment_analysis_results' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
-       <a href="{% url 'view_reports' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'view_reports' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
     </div>
     {% elif access == 'chairperson'%}
     <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
         <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
        type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
-       <a href="{% url 'feedbacks' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
-       <a href="{% url 'sentiment_analysis_results' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Sentiment Results</button></a>
-       <a href="{% url 'view_reports' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'view_reports' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
     </div>
     {% endif %}
@@ -42,7 +42,7 @@
 {% block content %}
 <div class="dashboard-contain">
     <div class="one">
-        <center><h1 class="dashboard-heading">Feedbacks</h1></center>
+        <center><h1 class="dashboard-heading">Reports</h1></center>
     </div>
     <div class="feedback-details">
     <center><table style=" width: 70%;
@@ -51,21 +51,24 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.1);">
         <thead>
             <tr>
-                <th>Feedback Number</th>
+                <th>Submit By</th>
                 <th>Course</th>
-                {% if access == 'admin' %}<th>Submit By</th>{% endif %}
                 <th>Explore</th>
             </tr>
         </thead>
         <tbody>
-        {% for feedback in feedbacks %}
+        {% for report in reports %}
         <tr>
-            <td>{{feedback.feedback_number}}</td>
-            <td>{{feedback.course.course_name}} (Section: {{feedback.course.section}})</td>
-            {% if access == 'admin' %}<td>{{feedback.registration_number.registration_number}}</td>{% endif %}
+            <td>{{report.username}}</td>
             <td>
-                <a href="{% url 'feedback' feedback.feedback_number %}" class="explore-now">Explore Now</a>
-                {% if access == 'admin' %}<a href="{% url 'delete_feedback' feedback.feedback_number %}" class="explore-now" style="background:red;">Delete</a>{% endif %}
+                {% if report.course_serial_number %}
+                {{ report.course_serial_number.course_name }} (Section: {{report.course_serial_number.section}})
+                {% else %}
+                Overall 
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'explore_reports' report_number=report.report_number %}" class="explore-now">Explore Now</a>
             </td>
         </tr>
         {% empty %}

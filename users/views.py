@@ -7,14 +7,44 @@ from .models import CustomUser
 from django.contrib import messages
 from .forms import CustomProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
-from .models import Teacher , Course, Student, Chairperson
-from .forms import TeachersForm, CoursesForm, StudentForm, TeacherProfileForm, ChairpersonForm
+from .models import Teacher , Course, Student, Chairperson, ContactSubmission
+from .forms import TeachersForm, CoursesForm, StudentForm, TeacherProfileForm, ChairpersonForm, ContactForm
 from django.contrib.auth.hashers import make_password
 
-
 def home(request):
-    return render(request, 'dashboard/home.html')
+    if request.user.is_authenticated:
+        loginyes = True
+    else:
+        loginyes = False
+        
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'users/submission.html',{'access':loginyes})
+    else:
+        form = ContactForm()
+    return render(request, 'dashboard/home.html', {'form': form, 'access':loginyes})
 
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'users/submission.html')
+    else:
+        form = ContactForm()
+    return render(request, 'users/contact.html',{'form':form})
+
+@login_required
+def submissionlist(request):
+    user = request.user
+    if user.is_superuser:
+        contact= ContactSubmission.objects.all()
+        return render(request, 'dashboard/submissionlist.html', {'contact':contact})
+    else:
+        return HttpResponse("404 Not Found!")
+    
 
 def register(request):
     if request.user.is_authenticated:
@@ -251,7 +281,11 @@ def student_dashboard(request):
     return render(request, 'dashboard/student_dashboard.html', context)
     
 def teacher_dashboard(request):
-    return render(request, 'dashboard/teacher_dashboard.html')
+    teacher = Teacher.objects.get(username=request.user.username)
+    name = teacher.full_name
+    return render(request, 'dashboard/teacher_dashboard.html', {'name': name})
 
 def chairperson_dashboard(request):
-    return render(request, 'dashboard/chairperson_dashboard.html')
+    chairperson = Chairperson.objects.get(username=request.user.username)
+    name = chairperson.full_name
+    return render(request, 'dashboard/chairperson_dashboard.html', {'name': name})

@@ -1,0 +1,86 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} Sentiment Analysis {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+       <a href="{% url 'teacheranalysis' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Sentiment Results</button></a>
+       <a href="{% url 'teacherreport' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+{% block content %}
+<div class="dashboard-contain">
+    <div class="one">
+        <center><h1 class="dashboard-heading">Sentiment Analysis Results</h1></center>
+    </div>
+    <div class="ayalysis-chart" style="
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center; padding-top: 40px; padding-bottom: 40px;">
+        <div class="analysis-details" style="    padding: 60px;
+        width: 30%;
+        border: 2px dashed green;
+        height: 100%;">
+            <p><strong>Total Feedbacks:</strong> {{ total_feedbacks }}</p>
+
+        <p><b>Positive:</b> {{ positive_percentage }}%</p>
+        <p><b>Negative: </b>{{ negative_percentage }}%</p>
+        <p><b>Neutral: </b>{{ neutral_percentage }}%</p>
+        </div>
+    <!-- Graph Code -->
+    <div class="anaylsis-pie" style="width: 30%; padding-left: 50px;">
+    <canvas id="sentimentChart" width="300" height="300" style="max-width: 300px !important; max-height: 300px !important;"></canvas>
+    </div>
+    
+    </div>
+    <div class="one" style="padding-top: 20px;">
+        <center><h1 class="dashboard-heading">Submit Report</h1></center>
+    </div>
+    <div class="report-message">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.report_message }}
+
+            <button type="submit">Submit Report</button>
+        </form>
+    </div>
+    <div class="dashboard">
+        <a href="{% url 'dashboard' %}">
+            <button class="button-89" role="button">Back to Dashboard</button>
+        </a>
+        <a href="{% url 'feedbacks' %}">
+            <button class="button-89" role="button">Feedbacks</button>
+        </a>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('sentimentChart').getContext('2d');
+        var data = {
+            labels: ['Positive(%)', 'Negative(%)', 'Neutral(%)'],
+            datasets: [{
+                data: [{{ positive_percentage }}, {{ negative_percentage }}, {{ neutral_percentage }}],
+                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+            }]
+        };
+        var options = {
+            responsive: true,
+        };
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    </script>
+{% endblock %}

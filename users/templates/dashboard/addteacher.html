@@ -1,5 +1,5 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} Teacher - Admin Dashboard {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
@@ -81,7 +81,7 @@
                 <td>{{ teacher.department }}</td>
                 <td>
                     {% for course in teacher.course_set.all %}
-                    {{ course.course_name }} (Section: {{course.section}}) 
+                    {{ course.course_name }} (Section: {{course.section}}) <br>
                     {% endfor %}
                 </td>
                 <!-- Add more course details here -->

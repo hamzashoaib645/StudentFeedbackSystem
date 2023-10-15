@@ -1,0 +1,60 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} Student Dashboard {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+        <a href="{% url 'home' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">Home</button></a>
+        <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+        <a href="{% url 'feedbackguide' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+        type="button" role="tab" aria-controls="timing" aria-selected="false">Feedback Guide</button></a>
+        <a href="{% url 'contact' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Contact Us</button></a>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+
+{% block content %}
+<div id="about" class="about section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="about-left-image  wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div id="lottie-container2"></div>
+              </div>
+            </div>
+            <div class="col-lg-6 align-self-center  wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+              <div class="about-right-content">
+                <div class="section-heading">
+                  <h6>About Us</h6>
+                  <h4>How to respond to <em>Feedback?</em></h4>
+                  <div class="line-dec"></div>
+                </div>
+                <pre>* Fill out all required fields.<br>* Write about what you feel for the particular.<br>* Suggestions if any.</pre>
+                <p>As good and effective educators, we always want to improve. Improvement is something we instill in our students and it would be hypocritical to not expect the same from ourselves. Students are the center of our classroom and they are where we can find the most relevant information about how to be better at our jobs. If we are not delivering effectively to the students how can we ever expect better satisfaction hopefully.</p>
+                <div class="row">
+                    <a href="{% url 'dashboard' %}" class="submit-feedback">Send Us Feedback</a>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard">
+    <a href="{% url 'dashboard' %}">
+        <button class="button-89" role="button">Back to Dashboard</button>
+    </a>
+</div>
+  {% endblock %}

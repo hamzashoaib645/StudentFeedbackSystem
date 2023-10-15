@@ -1320,9 +1320,9 @@ Portfolio
 }
 
 .portfolio-item .thumb img {
-  border-top-right-radius: 23px;
-  border-top-left-radius: 23px;
+  border-radius:  23px;
   overflow: hidden;
+  width: 100%;
 }
 
 .portfolio-item .down-content {
@@ -1766,4 +1766,35 @@ em{
 }
 h6{
   color: #4da6e7;
+}
+.add-course .course-style .content .form.feedbacksubmit .inputBox input {
+  height: 70px !important;
+}
+.ayalysis-chart{
+  text-align: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.inputBox ul li {
+  width: 80%;
+}
+.report-message {
+  display: flex;
+  justify-content: center;
+}
+.report-message form {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+.report-message form button {
+  background: #4da6e7;
+  color: white;
+  height: 60px;
+}
+.report-message form button:hover {
+  background: green;
+  transition: 0.2s ease;
 }

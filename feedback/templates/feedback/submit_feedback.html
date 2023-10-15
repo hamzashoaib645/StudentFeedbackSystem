@@ -1,23 +1,19 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} Student Dashboard {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
     <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
-        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+        <a href="{% url 'dashboard' %}"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
        type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
-       <a href="{% url 'addcourse' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
-       type="button" role="tab" aria-controls="about" aria-selected="false">Courses</button></a>
-       <a href="{% url 'addteacher' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
-       type="button" role="tab" aria-controls="timing" aria-selected="false">Teachers</button></a>
-       <a href="{% url 'addstudent' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
-       type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
-       type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
-       <a href="{% url 'feedbacks' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        <a href="{% url 'home' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">Home</button></a>
+        <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
-       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
+        <a href="{% url 'addteacher' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+        type="button" role="tab" aria-controls="timing" aria-selected="false">Feedback Guide</button></a>
+        <a href="{% url 'addstudent' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Contact Us</button></a>
     </div>
 </nav>
 <div class="position-relative d-inline-block me-lg-4">
@@ -27,12 +23,16 @@
 <!-- Nav Bar Code End -->
 
 {% block content %}
-    <h1>Submit Feedback for {{ course.course_name }}</h1>
+    <!--h1>Submit Feedback for {{ course.course_name }}</h1>
     
     <form method="post">
         {% csrf_token %}
-        
-        {{ form.course }}
+        Great course! Loved the material.
+        Excellent teaching, very clear. 
+        Enjoyed every class session.
+        The content was too confusing.
+        Not enough examples in the lectures.
+
         <br>Question 1: How would you rate the effectiveness of the teaching methods used in this course?
         {{ form.Q1 }}
         <br>Question 2: Were you satisfied with the relevance and comprehensiveness of the course materials?
@@ -45,7 +45,48 @@
         {{ form.Q5}}
         
         <button type="submit">Submit Feedback</button>
-    </form>
-    
-    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+    </form-->
+
+    <div class="admin-container">
+        <div class="container-detials">
+            <form method="post">
+                {% csrf_token %}
+            <div class="add-course">
+                <div class="course-style" style="width: 800px; margin-top: 20px;"> 
+                    <div class="content"> 
+                        <h2>Submit Feedback for {{ course.course_name }}</h2> 
+                        <div class="form feedbacksubmit" style="text-align:left;"> 
+                            <div class="inputBox" style="display: none;"> {{ form.course }} </div>
+                            {{ form.result }}
+                            <div class="inputBox"> 
+                                {{ form.Q1 }} <i>Question 1: How would you rate the effectiveness of the teaching methods used in this course?</i> 
+                            </div> 
+                            <div class="inputBox">
+                                {{ form.Q2 }}<i>Question 2: Were you satisfied with the relevance and comprehensiveness of the course materials?</i> 
+                            </div>
+                            <div class="inputBox"> 
+                                {{ form.Q3 }}<i>Question 3: Did you find the assessments (exams, quizzes, projects) fair and reflective of your understanding?</i> 
+                            </div>
+                            <div class="inputBox"> 
+                                {{ form.Q4 }}<i>Question 4: How would you rate the quality and usefulness of the lab sessions and facilities?</i> 
+                            </div>
+                            <div class="inputBox"> 
+                                {{ form.Q5 }}<i>Question 5: What is your overall assessment of this course, and do you have any suggestions for improvement?</i> 
+                            </div>
+                            <div class="inputBox"> 
+                                <button type="submit" class="login-button">Submit Feedback</button>
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+        </form>
+    </div>
+</div>
+    <div class="dashboard">
+        <a href="{% url 'dashboard' %}">
+            <button class="button-89" role="button">Back to Dashboard</button>
+        </a>
+    </div>
+
     {% endblock %}

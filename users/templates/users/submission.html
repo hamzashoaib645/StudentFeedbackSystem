@@ -1,0 +1,47 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block title %} Application Submitted - Student Feedback System {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+        
+        <a href="/"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Home</button></a>
+       <a href="#about"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">About</button></a>
+       <a href="/"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Get Password</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Gallery</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Contact</button></a>
+        {% if access == True %}
+        <a href="dashboard"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+            type="button" role="tab" aria-controls="about" aria-selected="false">Dashboard</button></a>
+    {% endif %}
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    {% if access == True %}
+      <a href="logout" ><button class="navbuttons">Logout</button></a>
+    {% else %}
+    <a href="login" ><button class="navbuttons">Login</button></a>
+    {% endif %}
+  </div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+
+{% block content %}
+<div class="one">
+    <center><h1 class="dashboard-heading">Application Received</h1>
+        <p>Your message has been submitted successfully. We'll get back to you soon.</p>
+    </center>
+</div>
+<div class="dashboard">
+    <a href="{% url 'home' %}">
+        <button class="button-89" role="button">Go Back</button>
+    </a>
+</div>
+
+{% endblock %}

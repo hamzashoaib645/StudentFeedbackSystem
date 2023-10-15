@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from .models import CustomUser
 from django.contrib.auth.forms import PasswordChangeForm
-from .models import Course , Teacher, Student, Chairperson
+from .models import Course , Teacher, Student, Chairperson , ContactSubmission
 
 
 class CustomUserCreationForm(forms.ModelForm):
@@ -177,3 +177,15 @@ class ChairpersonForm(forms.ModelForm):
     class Meta:
         model = Chairperson
         fields = ['full_name', 'username', 'password']
+        
+        
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactSubmission
+        fields = ['name', 'email', 'subject', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Your Name'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Your Email'}),
+            'subject': forms.TextInput(attrs={'placeholder': 'Subject'}),
+            'message': forms.Textarea(attrs={'placeholder': 'Your Message'}),
+        }

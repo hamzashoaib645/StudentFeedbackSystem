@@ -1,0 +1,55 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} Feedbacks {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+       <a href="{% url 'teacherfeedback' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+       <a href="{% url 'teacheranalysis' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Sentiment Results</button></a>
+       <a href="{% url 'teacherreport' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
+    </div>
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+
+{% block content %}
+<div class="dashboard-contain">
+    <div class="one">
+        <center><h1 class="dashboard-heading">Feedback</h1></center>
+    </div>
+    <ul>
+            <li style="display: none;"><strong>Feedback Number:&nbsp;</strong> {{ feedback.feedback_number }}<br></li>
+            <li style="width: 60%;"><strong>Course Name:&nbsp;</strong> {{ feedback.course.course_name }} (Section: {{feedback.course.section}})</li>
+            <li style="display: none;"><strong>Registration Number:&nbsp;</strong> {{ feedback.registration_number.registration_number }}</li>
+            <div class="Question"><strong>Question 1: How would you rate the effectiveness of the teaching methods used in this course?</strong> </div>
+            <li><strong>Answer: &nbsp;</strong>{{ feedback.Q1 }}</li>
+            <div class="Question"><strong>Question 2: Were you satisfied with the relevance and comprehensiveness of the course materials?</strong> </div>
+            <li><strong>Answer: &nbsp;</strong>{{ feedback.Q2 }}</li>
+            <div class="Question"><strong>Question 3: Did you find the assessments (exams, quizzes, projects) fair and reflective of your understanding?</strong> </div>
+            <li><strong>Answer: &nbsp;</strong>{{ feedback.Q3 }}</li>
+            <div class="Question"><strong>Question 4: How would you rate the quality and usefulness of the lab sessions and facilities?</strong> </div>
+            <li><strong>Answer: &nbsp;</strong>{{ feedback.Q4 }}</li>
+            <div class="Question"><strong>Question 5: What is your overall assessment of this course, and do you have any suggestions for improvement?</strong> </div>
+            <li><strong>Answer: &nbsp;</strong>{{ feedback.Q5 }}</li>
+                
+            </li>
+            <hr>
+    </ul>
+</div>
+<div class="dashboard">
+    <a href="{% url 'dashboard' %}">
+        <button class="button-89" role="button">Back to Dashboard</button>
+    </a>
+    <a href="{% url 'feedbacks' %}">
+        <button class="button-89" role="button">All Feedbacks</button>
+    </a>
+</div>
+{% endblock %}

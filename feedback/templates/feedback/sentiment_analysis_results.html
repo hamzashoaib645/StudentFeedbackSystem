@@ -1,0 +1,185 @@
+{% extends 'dashboard/base.html' %}
+{% block title %} Sentiment Analysis {% endblock %}
+<!-- Nav Bar Code -->
+{% block navbar%}
+<nav>
+    {% if access == 'admin' %}
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+       <a href="{% url 'addcourse' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+       type="button" role="tab" aria-controls="about" aria-selected="false">Courses</button></a>
+       <a href="{% url 'addteacher' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+       type="button" role="tab" aria-controls="timing" aria-selected="false">Teachers</button></a>
+       <a href="{% url 'addstudent' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Students</button></a>
+       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+       <a href="{% url 'view_reports' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
+    </div>
+    {% elif access == 'chairperson' %}
+    <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
+        <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+       type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
+       <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
+       <a href="{% url 'sentiment_analysis_results' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Sentiment Results</button></a>
+       <a href="{% url 'view_reports' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
+    </div>
+    {% endif %}
+</nav>
+<div class="position-relative d-inline-block me-lg-4">
+    <a href="{% url 'logout' %}" ><button class="navbuttons">Logout</button></a>
+</div>
+{% endblock %}
+<!-- Nav Bar Code End -->
+{% block content %}
+<div class="dashboard-contain">
+    <div class="one">
+        <center><h1 class="dashboard-heading">Sentiment Analysis Results</h1></center>
+    </div>
+    <div class="ayalysis-chart" style="
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center; padding-top: 40px; padding-bottom: 40px;">
+        <div class="analysis-details" style="    padding: 60px;
+        width: 30%;
+        border: 2px dashed green;
+        height: 100%;">
+            <p><strong>Total Feedbacks:</strong> {{ total_feedbacks }}</p>
+
+        <p><b>Positive:</b> {{ positive_percentage }}%</p>
+        <p><b>Negative: </b>{{ negative_percentage }}%</p>
+        <p><b>Neutral: </b>{{ neutral_percentage }}%</p>
+        </div>
+    <!-- Graph Code -->
+    <div class="anaylsis-pie" style="width: 30%; padding-left: 50px;">
+    <canvas id="sentimentChart" width="300" height="300" style="max-width: 300px !important; max-height: 300px !important;"></canvas>
+    </div>
+    
+    </div>
+    <div class="dashboard">
+        <!-- div>
+        {% if course_serial %}
+        <a href="{% url 'course_sentiment_report' serial_number=course_serial %}">
+            <button class="button-89" role="button">Submit Report</button>
+        </a>
+        {% elif teacher_username %}
+        <a href="{% url 'teacher_sentiment_analysis' teacher_id=teacher_username %}">
+            <button class="button-89" role="button">Submit Report</button>
+        </a>
+        {% else %}
+        <a href="{% url 'sentiment_report' %}">
+            <button class="button-89" role="button">Submit Report</button>
+        </a>
+        {% endif %}
+        <div-->
+    </div>
+    <div class="one">
+        <center><h1 class="dashboard-heading">Course-wise Analysis</h1></center>
+    </div>
+    <div class="feedback-details">
+    <center><table style=" width: 70%;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Section</th>
+                <th>Teach by</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+        <tr>
+            <td>{{course.course_name}}</td>
+            <td>{{course.section}}</td>
+            <td>{{course.teacher}}</td>
+            <td>
+                <a href="{% url 'course_sentiment_analysis' course.pk %}" class="explore-now">Analysis</a>
+            </td>
+        </tr>
+        {% empty %}
+            <p>No Courses available.</p>
+        {% endfor %}
+        </tbody>
+    </table>
+</center>
+</div>
+<div class="one" style="padding-top: 20px;">
+    <center><h1 class="dashboard-heading">Teacher-wise Analysis</h1></center>
+</div>
+<div class="feedback-details">
+    <center><table style=" width: 70%;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+        <thead>
+            <tr>
+                <th>Teacher Name</th>
+                <th>Username</th>
+                <th>Department</th>
+                <th>Courses Teach</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.full_name }}</td>
+                <td>{{ teacher.username }}</td>
+                <td>{{ teacher.department }}</td>
+                <td>
+                    {% for course in teacher.course_set.all %}
+                    {{ course.course_name }} (Section: {{course.section}}) <br>
+                    {% endfor %}
+                </td>
+            <td>
+                <a href="{% url 'teacher_sentiment_analysis' teacher_id=teacher.username %}" class="explore-now">Analysis</a>
+            </td>
+        </tr>
+        {% empty %}
+            <p>No Teacher available.</p>
+        {% endfor %}
+        </tbody>
+    </table>
+</center>
+</div>
+</div>
+    
+
+    <div class="dashboard">
+        <a href="{% url 'dashboard' %}">
+            <button class="button-89" role="button">Back to Dashboard</button>
+        </a>
+        <a href="{% url 'sentiment_analysis_results' %}">
+            <button class="button-89" role="button">All Sentiment</button>
+        </a>
+    </div>
+    <script>
+        var ctx = document.getElementById('sentimentChart').getContext('2d');
+        var data = {
+            labels: ['Positive(%)', 'Negative(%)', 'Neutral(%)'],
+            datasets: [{
+                data: [{{ positive_percentage }}, {{ negative_percentage }}, {{ neutral_percentage }}],
+                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+            }]
+        };
+        var options = {
+            responsive: true,
+        };
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    </script>
+{% endblock %}

@@ -16,7 +16,7 @@
        type="button" role="tab" aria-controls="courses" aria-selected="false">Chairperson</button></a>
        <a href="{% url 'feedbacks' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
-       <a href="/"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'view_reports' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
        type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
     </div>
 </nav>
@@ -53,7 +53,7 @@
                 </a>
             </div>
             <div class="dashboard">
-                <a href="{% url 'addstudent' %}">
+                <a href="{% url 'sentiment_analysis_results' %}">
                     <div class="dashboard-buttons">
                         <h2> Sentiment Results </h2>
                     </div>
@@ -63,9 +63,14 @@
                         <h2> Feedbacks </h2>
                     </div>
                 </a>
-                <a href="{% url 'addstudent' %}">
+                <a href="{% url 'view_reports' %}">
                     <div class="dashboard-buttons">
                         <h2> Reports </h2>
+                    </div>
+                </a>
+                <a href="{% url 'submissions' %}">
+                    <div class="dashboard-buttons">
+                        <h2> Contact Submissions </h2>
                     </div>
                 </a>
             </div>

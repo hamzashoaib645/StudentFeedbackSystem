@@ -1,19 +1,17 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Student Dashboard {% endblock %}
+{% block title %} Feedbacks {% endblock %}
 <!-- Nav Bar Code -->
 {% block navbar%}
 <nav>
     <div class="nav d-block d-lg-flex nav-tabs " id="nav-tab" role="tablist">
         <a href="{% url 'dashboard' %}"><button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
        type="button" role="tab" aria-controls="home" aria-selected="true">Dashboard</button></a>
-        <a href="{% url 'home' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
-       type="button" role="tab" aria-controls="about" aria-selected="false">Home</button></a>
-        <a href="{% url 'feedbacks' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       <a href="{% url 'teacherfeedback' %}"><button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
         type="button" role="tab" aria-controls="courses" aria-selected="false">Feedbacks</button></a>
-        <a href="{% url 'feedbackguide' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
-        type="button" role="tab" aria-controls="timing" aria-selected="false">Feedback Guide</button></a>
-        <a href="{% url 'contact' %}"> <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
-        type="button" role="tab" aria-controls="courses" aria-selected="false">Contact Us</button></a>
+       <a href="{% url 'teacheranalysis' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+        type="button" role="tab" aria-controls="courses" aria-selected="false">Sentiment Results</button></a>
+       <a href="{% url 'teacherreport' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+       type="button" role="tab" aria-controls="courses" aria-selected="false">Reports</button></a>
     </div>
 </nav>
 <div class="position-relative d-inline-block me-lg-4">
@@ -35,17 +33,15 @@
         <thead>
             <tr>
                 <th>Course</th>
-                <th>Submit By</th>
-                <th>Action</th>
+                <th>Explore</th>
             </tr>
         </thead>
         <tbody>
         {% for feedback in feedbacks %}
         <tr>
             <td>{{feedback.course.course_name}} (Section: {{feedback.course.section}})</td>
-            <td>{{feedback.registration_number.registration_number}}</td>
             <td>
-                <a href="{% url 'feedback' feedback.feedback_number %}" class="explore-now">Explore Now</a>
+                <a href="{% url 'teacherfeedbackexp' feedback.feedback_number %}" class="explore-now">Explore Now</a>
             </td>
         </tr>
         {% empty %}
@@ -62,7 +58,31 @@
         <a href="{% url 'dashboard' %}">
             <button class="button-89" role="button">Back to Dashboard</button>
         </a>
+        <a href="{% url 'sentiment_analysis_results' %}">
+            <button class="button-89" role="button">Sentiment Analysis</button>
+        </a>
     </div>
 
     
 {% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Results</title>
+</head>
+<body>
+    
+
+    <h2>Feedbacks for Courses Taught by {{ request.user.username }}</h2>
+    <ul>
+        {% for feedback in feedbacks %}
+            <li>
+                Feedback #{{ feedback.feedback_number }} - Course: {{ feedback.course.course_name }} - Result: {{ feedback.result }}
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
