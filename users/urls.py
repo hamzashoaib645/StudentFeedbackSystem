@@ -18,6 +18,10 @@ urlpatterns = [
     path('dashboard/addchairperson/', views.addchairperson, name='addchairperson'),
     path('dashboard/addstudent/', views.addstudent, name='addstudent'),
     path('contact/', views.contact, name='contact'),
+    path('student/delete/<str:registration_number>/', views.delete_student, name='delete_student'),
+    path('teacher/delete/<str:username>/', views.delete_teacher, name='delete_teacher'),
+    path('chairperson/delete/<str:username>/', views.delete_chairperson, name='delete_chairperson'),
+    path('course/delete/<int:serial_number>/', views.delete_course, name='delete_course'),
     #path('dashboard/students/', views.students, name='teachers'),
     # Add other URLs as needed
 ]

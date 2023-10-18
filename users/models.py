@@ -33,7 +33,6 @@ class Course(models.Model):
     course_name = models.CharField(max_length=255)
     section = models.PositiveIntegerField()
     teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True, blank=True, default=None)
-    feedback = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.course_id} - {self.course_name} (Section {self.section}) teached by {self.teacher}"

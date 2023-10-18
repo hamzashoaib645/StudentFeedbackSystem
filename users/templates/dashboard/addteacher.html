@@ -73,6 +73,7 @@
                 <th>Username</th>
                 <th>Department</th>
                 <th>Courses Teach</th>
+                <th>Action</th>
             </thead>
             {% for teacher in teachers %}
             <tr>
@@ -83,6 +84,9 @@
                     {% for course in teacher.course_set.all %}
                     {{ course.course_name }} (Section: {{course.section}}) <br>
                     {% endfor %}
+                </td>
+                <td>
+                    <a href="{% url 'delete_teacher' teacher.username %}" class="explore-now" style="background:red;">Delete</a>
                 </td>
                 <!-- Add more course details here -->
             </tr>

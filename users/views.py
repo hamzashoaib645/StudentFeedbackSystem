@@ -1,5 +1,5 @@
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -289,3 +289,55 @@ def chairperson_dashboard(request):
     chairperson = Chairperson.objects.get(username=request.user.username)
     name = chairperson.full_name
     return render(request, 'dashboard/chairperson_dashboard.html', {'name': name})
+
+@login_required
+def delete_student(request, registration_number):
+    student = get_object_or_404(Student, registration_number=registration_number)
+
+    if request.method == 'POST':
+        student.delete()
+        return redirect('addstudent')  # Redirect to feedback list page after deletion
+
+    if request.user.is_superuser:
+        return render(request, 'dashboard/delete_student.html', {'student': student})
+    else:
+        return HttpResponse("404 Not Found!")
+    
+@login_required
+def delete_teacher(request, username):
+    teacher = get_object_or_404(Teacher, username=username)
+
+    if request.method == 'POST':
+        teacher.delete()
+        return redirect('addteacher')  # Redirect to feedback list page after deletion
+
+    if request.user.is_superuser:
+        return render(request, 'dashboard/delete_teacher.html', {'teacher': teacher})
+    else:
+        return HttpResponse("404 Not Found!")
+    
+@login_required
+def delete_chairperson(request, username):
+    chairperson = get_object_or_404(Chairperson, username=username)
+
+    if request.method == 'POST':
+        chairperson.delete()
+        return redirect('addchairperson')  # Redirect to feedback list page after deletion
+
+    if request.user.is_superuser:
+        return render(request, 'dashboard/delete_chairperson.html', {'chairperson': chairperson})
+    else:
+        return HttpResponse("404 Not Found!")
+    
+@login_required
+def delete_course(request, serial_number):
+    course = get_object_or_404(Course, serial_number=serial_number)
+
+    if request.method == 'POST':
+        course.delete()
+        return redirect('addcourse')  # Redirect to feedback list page after deletion
+
+    if request.user.is_superuser:
+        return render(request, 'dashboard/delete_course.html', {'course': course})
+    else:
+        return HttpResponse("404 Not Found!")

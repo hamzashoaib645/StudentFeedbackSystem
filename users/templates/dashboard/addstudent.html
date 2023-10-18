@@ -72,6 +72,7 @@
             <th>Registration Number</th>
             <th>Semester</th>
             <th>Courses</th>
+            <th>Action</th>
         </thead>
         {% for student in students %}
             <tr>
@@ -82,6 +83,9 @@
                     {% for course in student.enrolled_courses.all %}
                     {{ course.course_name }} (Section: {{course.section}})  <br>
                     {% endfor %}
+                </td>
+                <td>
+                    <a href="{% url 'delete_student' student.registration_number %}" class="explore-now" style="background:red;">Delete</a>
                 </td>
                 <!-- Add more course details here -->
             </tr>

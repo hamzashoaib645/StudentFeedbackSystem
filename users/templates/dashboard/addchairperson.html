@@ -64,11 +64,15 @@
             <thead>
                 <th>Full Name</th>
                 <th>Username</th>
+                <th>Action</th>
             </thead>
             {% for Chairperson in chairpersons %}
             <tr>
                 <td>{{ Chairperson.full_name }}</td>
                 <td>{{ Chairperson.username }}</td>
+                <td>
+                    <a href="{% url 'delete_chairperson' Chairperson.username %}" class="explore-now" style="background:red;">Delete</a>
+                </td>
                 <!-- Add more course details here -->
             </tr>
             {% endfor %}

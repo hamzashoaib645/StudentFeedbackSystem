@@ -63,6 +63,7 @@
             <th>Name</th>
             <th>Section</th>
             <th>Teacher</th>
+            <th>Action</th>
         </thead>
         {% for course in courses %}
             <tr>
@@ -70,6 +71,9 @@
                 <td>{{ course.course_name }}</td>
                 <td>{{ course.section }}</td>
                 <td>{{ course.teacher.full_name }}</td>
+                <td>
+                    <a href="{% url 'delete_course' course.pk %}" class="explore-now" style="background:red;">Delete</a>
+                </td>
                 <!-- Add more course details here -->
             </tr>
         {% endfor %}
