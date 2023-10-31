@@ -147,7 +147,6 @@ def submitfeedback(request, course_pk):
                         feedback.result = 'Neutral'
                     
                     feedback.save()
-                    student.enrolled_courses.filter(pk=course_pk).update(feedback=True)
                     return redirect('feedbacks')
             else:
                 form = FeedbackForm(course=course)  # Pass the course to the form

@@ -33,16 +33,12 @@
         <thead>
             <tr>
                 <th>Course</th>
-                <th>Explore</th>
             </tr>
         </thead>
         <tbody>
         {% for feedback in feedbacks %}
         <tr>
             <td>{{feedback.course.course_name}} (Section: {{feedback.course.section}})</td>
-            <td>
-                <a href="{% url 'teacherfeedbackexp' feedback.feedback_number %}" class="explore-now">Explore Now</a>
-            </td>
         </tr>
         {% empty %}
             <p>No feedbacks available.</p>

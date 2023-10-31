@@ -22,6 +22,7 @@ urlpatterns = [
     path('teacher/delete/<str:username>/', views.delete_teacher, name='delete_teacher'),
     path('chairperson/delete/<str:username>/', views.delete_chairperson, name='delete_chairperson'),
     path('course/delete/<int:serial_number>/', views.delete_course, name='delete_course'),
+    path('dashboard/faculty/', views.faculty, name='faculty'),
     #path('dashboard/students/', views.students, name='teachers'),
     # Add other URLs as needed
 ]

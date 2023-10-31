@@ -54,7 +54,10 @@
                 <th>Feedback Number</th>
                 <th>Course</th>
                 {% if access == 'admin' %}<th>Submit By</th>{% endif %}
+                {% if access == 'admin' %}
                 <th>Explore</th>
+                
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -63,10 +66,11 @@
             <td>{{feedback.feedback_number}}</td>
             <td>{{feedback.course.course_name}} (Section: {{feedback.course.section}})</td>
             {% if access == 'admin' %}<td>{{feedback.registration_number.registration_number}}</td>{% endif %}
+            {% if access == 'admin' %}
             <td>
-                <a href="{% url 'feedback' feedback.feedback_number %}" class="explore-now">Explore Now</a>
-                {% if access == 'admin' %}<a href="{% url 'delete_feedback' feedback.feedback_number %}" class="explore-now" style="background:red;">Delete</a>{% endif %}
+                <a href="{% url 'delete_feedback' feedback.feedback_number %}" class="explore-now" style="background:red;">Delete</a>
             </td>
+            {% endif %}
         </tr>
         {% empty %}
             <p>No feedbacks available.</p>

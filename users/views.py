@@ -271,7 +271,7 @@ def student_dashboard(request):
     student = Student.objects.get(registration_number=request.user.username)
 
     # Get the list of enrolled courses for the student
-    enrolled_courses = student.enrolled_courses.filter(feedback__isnull=False)
+    enrolled_courses = student.enrolled_courses.all()
 
     context = {
         'student': student,
@@ -341,3 +341,10 @@ def delete_course(request, serial_number):
         return render(request, 'dashboard/delete_course.html', {'course': course})
     else:
         return HttpResponse("404 Not Found!")
+    
+@login_required
+def faculty(request):
+    user = request.user  
+
+    if user.is_superuser:
+        return render(request, 'dashboard/faculty.html')
